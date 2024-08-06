@@ -8,5 +8,5 @@ import com.patricklima.myapp.notifications.entities.UserChannel;
 import com.patricklima.myapp.notifications.entities.pks.UserChannelId;
 
 public interface UserChannelRepository extends JpaRepository<UserChannel, UserChannelId> {
-	List<UserChannel> findByUser(Long userId);
+	List<UserChannel> findByUserId(Long userId);
 }

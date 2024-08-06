@@ -8,5 +8,5 @@ import com.patricklima.myapp.notifications.entities.Subscription;
 import com.patricklima.myapp.notifications.entities.pks.SubscriptionId;
 
 public interface SubscriptionRepository extends JpaRepository<Subscription, SubscriptionId> {
-	List<Subscription> findByCategory(Long categoryId);
+	List<Subscription> findByCategoryId(Long categoryId);
 }
