@@ -3,8 +3,8 @@ package com.patricklima.myapp.notifications.entities;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,11 +24,11 @@ public class NotificationChannel {
 	@Column(length = 50, unique = true)
 	private String name;
 
-	@CreatedDate
+	@CreationTimestamp
 	@Column(updatable = false)
 	private LocalDateTime createdAt;
 
-	@LastModifiedDate
+	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 
 	@OneToMany(mappedBy = "channel")
@@ -36,6 +36,13 @@ public class NotificationChannel {
 
 	@OneToMany(mappedBy = "channel")
 	private Set<MessageDispatch> messageDispatches;
+	
+	public NotificationChannel() {
+	}
+	
+	public NotificationChannel(String name) {
+		this.name = name;
+	}
 
 	public Long getId() {
 		return id;

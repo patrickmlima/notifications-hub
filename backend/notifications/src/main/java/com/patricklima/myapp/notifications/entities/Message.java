@@ -3,7 +3,7 @@ package com.patricklima.myapp.notifications.entities;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,7 +29,7 @@ public class Message {
 	@JoinColumn(name = "categoryId", nullable = false, referencedColumnName = "id")
 	private Category category;
 
-	@CreatedDate
+	@CreationTimestamp
 	@Column(updatable = false)
 	private LocalDateTime createdAt;
 

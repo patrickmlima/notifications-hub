@@ -2,7 +2,7 @@ package com.patricklima.myapp.notifications.entities;
 
 import java.time.LocalDateTime;
 
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.patricklima.myapp.notifications.entities.pks.MessageDispatchId;
 
@@ -35,7 +35,7 @@ public class MessageDispatch {
 	@JoinColumn(name = "channelId")
 	private NotificationChannel channel;
 
-	@CreatedDate
+	@CreationTimestamp
 	@Column(updatable = false)
 	private LocalDateTime createdAt;
 

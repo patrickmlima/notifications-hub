@@ -2,8 +2,8 @@ package com.patricklima.myapp.notifications.entities;
 
 import java.time.LocalDateTime;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.patricklima.myapp.notifications.entities.pks.SubscriptionId;
 
@@ -22,11 +22,11 @@ public class Subscription {
 	@EmbeddedId
 	private SubscriptionId subscriptionId;
 
-	@CreatedDate
+	@CreationTimestamp
 	@Column(updatable = false)
 	private LocalDateTime createdAt;
 
-	@LastModifiedDate
+	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 
 	@ManyToOne
@@ -38,6 +38,13 @@ public class Subscription {
 	@MapsId("categoryId")
 	@JoinColumn(name = "categoryId")
 	private Category category;
+
+	public Subscription() {
+	}
+
+	public Subscription(Long userId, Long categoryId) {
+		this.subscriptionId = new SubscriptionId(userId, categoryId);
+	}
 
 	public SubscriptionId getSubscriptionId() {
 		return subscriptionId;

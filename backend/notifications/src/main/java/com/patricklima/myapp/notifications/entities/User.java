@@ -3,8 +3,8 @@ package com.patricklima.myapp.notifications.entities;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,11 +30,11 @@ public class User {
 	@Column(length = 16, unique = true)
 	private String phoneNumber;
 
-	@CreatedDate
+	@CreationTimestamp
 	@Column(updatable = false)
 	private LocalDateTime createdAt;
 
-	@LastModifiedDate
+	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 
 	@OneToMany(mappedBy = "user")
@@ -45,6 +45,15 @@ public class User {
 
 	@OneToMany(mappedBy = "user")
 	private Set<MessageDispatch> messageDispatches;
+
+	public User() {
+	}
+
+	public User(String name, String email, String phoneNumber) {
+		this.name = name;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+	}
 
 	public Long getId() {
 		return id;

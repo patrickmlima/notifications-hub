@@ -2,8 +2,8 @@ package com.patricklima.myapp.notifications.entities;
 
 import java.time.LocalDateTime;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.patricklima.myapp.notifications.entities.pks.UserChannelId;
 
@@ -22,11 +22,11 @@ public class UserChannel {
 	@EmbeddedId
 	private UserChannelId userChannelId;
 
-	@CreatedDate
+	@CreationTimestamp
 	@Column(updatable = false)
 	private LocalDateTime createdAt;
 
-	@LastModifiedDate
+	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 
 	@ManyToOne

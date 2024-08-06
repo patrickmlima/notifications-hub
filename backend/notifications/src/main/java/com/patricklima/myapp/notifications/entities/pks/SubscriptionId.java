@@ -14,6 +14,14 @@ public class SubscriptionId implements Serializable {
 
 	private Long categoryId;
 
+	public SubscriptionId() {
+	}
+
+	public SubscriptionId(Long userId, Long categoryId) {
+		this.userId = userId;
+		this.categoryId = categoryId;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
