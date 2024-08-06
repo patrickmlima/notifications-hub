@@ -13,6 +13,15 @@ public class UserChannelId implements Serializable {
 	private Long userId;
 	private Long channelId;
 
+	public UserChannelId() {
+
+	}
+
+	public UserChannelId(Long userId, Long channelId) {
+		this.userId = userId;
+		this.channelId = channelId;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

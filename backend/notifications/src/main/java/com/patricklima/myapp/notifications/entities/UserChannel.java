@@ -31,13 +31,22 @@ public class UserChannel {
 
 	@ManyToOne
 	@MapsId("userId")
-	@JoinColumn(name = "userId", referencedColumnName = "id")
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 
 	@ManyToOne
 	@MapsId("channelId")
-	@JoinColumn(name = "channelId", referencedColumnName = "id")
+	@JoinColumn(name = "channel_id", referencedColumnName = "id")
 	private NotificationChannel channel;
+	
+	public UserChannel() {
+	}
+	
+	public UserChannel(Long userId, Long channelId) {
+		this.userChannelId = new UserChannelId(userId, channelId);
+		this.user = new User(userId);
+		this.channel = new NotificationChannel(channelId);
+	}
 
 	public UserChannelId getUserChannelId() {
 		return userChannelId;

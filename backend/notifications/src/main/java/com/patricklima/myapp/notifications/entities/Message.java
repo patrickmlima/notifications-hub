@@ -26,7 +26,7 @@ public class Message {
 	private String body;
 
 	@ManyToOne
-	@JoinColumn(name = "categoryId", nullable = false, referencedColumnName = "id")
+	@JoinColumn(name = "category_id", nullable = false, referencedColumnName = "id")
 	private Category category;
 
 	@CreationTimestamp

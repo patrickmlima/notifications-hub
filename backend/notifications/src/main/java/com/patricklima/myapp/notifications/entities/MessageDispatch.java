@@ -22,17 +22,17 @@ public class MessageDispatch {
 
 	@ManyToOne
 	@MapsId("messageId")
-	@JoinColumn(name = "messageId")
+	@JoinColumn(name = "message_id")
 	private Message message;
 
 	@ManyToOne
 	@MapsId("userId")
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	@ManyToOne
 	@MapsId("channelId")
-	@JoinColumn(name = "channelId")
+	@JoinColumn(name = "channel_id")
 	private NotificationChannel channel;
 
 	@CreationTimestamp

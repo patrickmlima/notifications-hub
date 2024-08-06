@@ -40,6 +40,10 @@ public class NotificationChannel {
 	public NotificationChannel() {
 	}
 	
+	public NotificationChannel(Long id) {
+		this.id = id;
+	}
+	
 	public NotificationChannel(String name) {
 		this.name = name;
 	}

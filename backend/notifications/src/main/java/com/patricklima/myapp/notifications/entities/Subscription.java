@@ -31,12 +31,12 @@ public class Subscription {
 
 	@ManyToOne
 	@MapsId("userId")
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	@ManyToOne
 	@MapsId("categoryId")
-	@JoinColumn(name = "categoryId")
+	@JoinColumn(name = "category_id")
 	private Category category;
 
 	public Subscription() {
@@ -44,6 +44,8 @@ public class Subscription {
 
 	public Subscription(Long userId, Long categoryId) {
 		this.subscriptionId = new SubscriptionId(userId, categoryId);
+		this.category = new Category(categoryId);
+		this.user = new User(userId);
 	}
 
 	public SubscriptionId getSubscriptionId() {
