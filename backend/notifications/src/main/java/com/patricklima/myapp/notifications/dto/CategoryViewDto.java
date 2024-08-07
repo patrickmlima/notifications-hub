@@ -1,12 +1,14 @@
 package com.patricklima.myapp.notifications.dto;
 
+import com.patricklima.myapp.notifications.entities.Category;
+
 public class CategoryViewDto {
 	private Long id;
 	private String name;
 	
-	CategoryViewDto(Long id, String name){
-		this.id = id;
-		this.name = name;
+	public CategoryViewDto(Category category){
+		this.id = category.getId();
+		this.name = category.getName();
 	}
 
 	public Long getId() {

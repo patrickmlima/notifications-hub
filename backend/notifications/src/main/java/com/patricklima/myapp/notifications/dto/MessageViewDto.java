@@ -2,7 +2,6 @@ package com.patricklima.myapp.notifications.dto;
 
 import java.time.LocalDateTime;
 
-import com.patricklima.myapp.notifications.entities.Category;
 import com.patricklima.myapp.notifications.entities.Message;
 
 public class MessageViewDto {
@@ -13,8 +12,7 @@ public class MessageViewDto {
 	public MessageViewDto(Message message) {
 		this.body = message.getBody();
 		this.createdAt = message.getCreatedAt();
-		Category category = message.getCategory();
-		this.category = new CategoryViewDto(category.getId(), category.getName());
+		this.category = new CategoryViewDto(message.getCategory());
 	}
 
 	public String getBody() {
