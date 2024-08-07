@@ -36,6 +36,19 @@ public class Message {
 
 	@OneToMany(mappedBy = "message", fetch = FetchType.LAZY)
 	private Set<MessageDispatch> messageDispatches;
+	
+	public Message() {
+	}
+	
+	public Message(String body, Category category) {
+		this.body = body;
+		this.category = category;
+	}
+	
+	public Message(String body, Long categoryId) {
+		this.body = body;
+		this.category = new Category(categoryId);
+	}
 
 	public Long getId() {
 		return id;

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.patricklima.myapp.notifications.dto.CreateMessageRequest;
 import com.patricklima.myapp.notifications.dto.MessageViewDto;
 import com.patricklima.myapp.notifications.entities.Message;
+import com.patricklima.myapp.notifications.services.MessageDispatchService;
 import com.patricklima.myapp.notifications.services.MessageService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,6 +25,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 public class MessageController {
 	@Autowired
 	private MessageService messageService;
+	@Autowired
+	private MessageDispatchService messageDispatchService;
 
 	@GetMapping
 	@Operation(summary = "List all messages on the system", responses = {
@@ -33,12 +36,12 @@ public class MessageController {
 	public List<MessageViewDto> listMessages() {
 		List<Message> messages = messageService.getMessages();
 		List<MessageViewDto> response = new LinkedList<MessageViewDto>();
-		
+
 		for (Iterator<Message> iterator = messages.iterator(); iterator.hasNext();) {
 			Message message = iterator.next();
 			response.add(new MessageViewDto(message));
 		}
-		
+
 		return response;
 	}
 
@@ -48,6 +51,8 @@ public class MessageController {
 			@ApiResponse(responseCode = "400", description = "Bad request"),
 			@ApiResponse(responseCode = "500", description = "Internal server error") })
 	public Message createMessage(@RequestBody CreateMessageRequest request) {
-		return messageService.createMessage(request);
+		Message newMessage = messageService.createMessage(request);
+		messageDispatchService.sendMessageNotifications(newMessage);
+		return newMessage;
 	}
 }
