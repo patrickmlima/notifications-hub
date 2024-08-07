@@ -19,7 +19,7 @@ export class ResourceApiRepository<R> implements ApiRepository<R, number> {
     const url = `${this.resourceUrl}/${id}`;
     return this.http.get<R>(url);
   }
-  create(data: Partial<R>): Observable<R> {
+  create<L>(data: Partial<R> | L): Observable<R> {
     return this.http.post<R>(this.resourceUrl, data);
   }
   update(id: number, data: Partial<R>): Observable<R> {

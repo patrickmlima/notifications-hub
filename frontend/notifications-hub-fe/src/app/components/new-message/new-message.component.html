@@ -13,14 +13,23 @@
     ></button>
   </div>
   <div class="modal-body">
-    <form>
+    <form name="new-message-form" [formGroup]="formData" novalidate>
       <div class="row">
         <label class="form-label">Message</label>
-        <textarea class="form-control"></textarea>
+        <textarea
+          id="message-body"
+          class="form-control"
+          name="body"
+          formControlName="body"
+        ></textarea>
       </div>
       <div class="row">
         <label class="form-label">Category</label>
-        <select class="form-select">
+        <select
+          id="message-category"
+          class="form-select"
+          formControlName="categoryId"
+        >
           @for (category of categories(); track $index) {
           <option [value]="category.id">{{ category.name }}</option>
           }
@@ -31,8 +40,9 @@
   <div class="modal-footer">
     <button
       type="button"
-      class="btn btn-outline-secondary"
-      (click)="modal.close('Save click')"
+      class="btn btn-primary"
+      (click)="submitForm()"
+      [disabled]="formData.invalid"
     >
       Save
     </button>
