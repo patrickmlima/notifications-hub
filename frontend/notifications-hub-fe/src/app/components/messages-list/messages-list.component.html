@@ -1,0 +1,16 @@
+<section>
+  <table>
+    <thead>
+      <tr>
+        <th>Message</th>
+        <th>Created at</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let message of messagesList()">
+        <td>{{ message.body }}</td>
+        <td>{{ message.createdAt }}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
