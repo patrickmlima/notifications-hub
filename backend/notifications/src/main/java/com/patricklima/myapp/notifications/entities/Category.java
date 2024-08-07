@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,10 +32,10 @@ public class Category {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 
-	@OneToMany(mappedBy = "category")
+	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
 	private Set<Subscription> subscriptions;
 
-	@OneToMany(mappedBy = "category")
+	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
 	private Set<Message> messages;
 
 	public Category() {

@@ -41,6 +41,12 @@ public class MessageDispatch {
 
 	@Column
 	private LocalDateTime deliveredAt;
+	
+	public MessageDispatch() {}
+	
+	public MessageDispatch(Long messageId, Long userId, Long channelId) {
+		this.messageDispatchId = new MessageDispatchId(messageId, userId, channelId);
+	}
 
 	public MessageDispatchId getMessageDispatchId() {
 		return messageDispatchId;

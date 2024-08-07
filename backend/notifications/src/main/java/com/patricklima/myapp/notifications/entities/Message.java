@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,7 +34,7 @@ public class Message {
 	@Column(updatable = false)
 	private LocalDateTime createdAt;
 
-	@OneToMany(mappedBy = "message")
+	@OneToMany(mappedBy = "message", fetch = FetchType.LAZY)
 	private Set<MessageDispatch> messageDispatches;
 
 	public Long getId() {

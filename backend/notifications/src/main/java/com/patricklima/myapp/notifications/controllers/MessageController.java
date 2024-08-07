@@ -1,5 +1,7 @@
 package com.patricklima.myapp.notifications.controllers;
 
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.patricklima.myapp.notifications.dto.CreateMessageRequest;
+import com.patricklima.myapp.notifications.dto.MessageViewDto;
 import com.patricklima.myapp.notifications.entities.Message;
 import com.patricklima.myapp.notifications.services.MessageService;
 
@@ -27,8 +30,16 @@ public class MessageController {
 			@ApiResponse(responseCode = "200", description = "Success")
 
 	})
-	public List<Message> listMessages() {
-		return messageService.getMessages();
+	public List<MessageViewDto> listMessages() {
+		List<Message> messages = messageService.getMessages();
+		List<MessageViewDto> response = new LinkedList<MessageViewDto>();
+		
+		for (Iterator<Message> iterator = messages.iterator(); iterator.hasNext();) {
+			Message message = iterator.next();
+			response.add(new MessageViewDto(message));
+		}
+		
+		return response;
 	}
 
 	@PostMapping

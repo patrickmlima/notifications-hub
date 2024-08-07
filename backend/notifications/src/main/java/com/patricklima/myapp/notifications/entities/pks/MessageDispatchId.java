@@ -13,6 +13,8 @@ public class MessageDispatchId implements Serializable {
 	private Long userId;
 	private Long channelId;
 	
+	public MessageDispatchId() {}
+	
 	public MessageDispatchId(Long messageId, Long userId, Long channelId) {
 		this.messageId = messageId;
 		this.userId = userId;

@@ -10,7 +10,6 @@ import com.patricklima.myapp.notifications.entities.MessageDispatch;
 import com.patricklima.myapp.notifications.entities.Subscription;
 import com.patricklima.myapp.notifications.entities.User;
 import com.patricklima.myapp.notifications.entities.UserChannel;
-import com.patricklima.myapp.notifications.entities.pks.MessageDispatchId;
 import com.patricklima.myapp.notifications.repositories.MessageDispatchRepository;
 import com.patricklima.myapp.notifications.repositories.MessageRepository;
 import com.patricklima.myapp.notifications.repositories.SubscriptionRepository;
@@ -48,13 +47,10 @@ public class MessageService {
 			List<UserChannel> userChannels = userChannelRepository.findByUserId(user.getId());
 
 			for (UserChannel channel : userChannels) {
-				MessageDispatch dispatch = new MessageDispatch();
-				dispatch.setMessageDispatchId(
-						new MessageDispatchId(message.getId(), user.getId(), channel.getChannel().getId()));
-				dispatch.setMessage(message);
+				MessageDispatch dispatch = new MessageDispatch(message.getId(), user.getId(), channel.getChannel().getId());
 				dispatch.setUser(user);
 				dispatch.setChannel(channel.getChannel());
-
+				dispatch.setMessage(message);
 				messageDispatchRepository.save(dispatch);
 			}
 		}
