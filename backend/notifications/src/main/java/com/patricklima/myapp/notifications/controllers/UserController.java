@@ -3,6 +3,7 @@ package com.patricklima.myapp.notifications.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,8 +24,9 @@ public class UserController {
 	@Operation(summary = "List all users", responses = {
 			@ApiResponse(responseCode = "200", description = "Success")
 	})
-	public List<User> listUsers() {
-		return userService.getUsers();
+	public ResponseEntity<List<User>> listUsers() {
+		List<User> users = userService.getUsers();
+		return ResponseEntity.ok(users);
 	}
 	
 }

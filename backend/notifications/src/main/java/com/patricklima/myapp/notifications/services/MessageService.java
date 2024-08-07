@@ -1,6 +1,7 @@
 package com.patricklima.myapp.notifications.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -25,5 +26,9 @@ public class MessageService {
 
 	public List<Message> getMessages() {
 		return messageRepository.findAll(Sort.by("createdAt").descending());
+	}
+
+	public Optional<Message> getMessage(Long id) {
+		return messageRepository.findById(id);
 	}
 }
