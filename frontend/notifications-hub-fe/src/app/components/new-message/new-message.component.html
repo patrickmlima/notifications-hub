@@ -1,1 +1,40 @@
-<p>new-message works!</p>
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">
+  New Message
+</button>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New message</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="close()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="row">
+        <label class="form-label">Message</label>
+        <textarea class="form-control"></textarea>
+      </div>
+      <div class="row">
+        <label class="form-label">Category</label>
+        <select class="form-select">
+          @for (category of categories(); track $index) {
+          <option [value]="category.id">{{ category.name }}</option>
+          }
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-secondary"
+      (click)="modal.close('Save click')"
+    >
+      Save
+    </button>
+  </div>
+</ng-template>

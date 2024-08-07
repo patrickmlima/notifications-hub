@@ -1,5 +1,5 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { MessageService } from '../../services/messages.service';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { MessageService } from '../../services/message.service';
 import { Message } from '../../../shared/types/message.type';
 import { CommonModule } from '@angular/common';
 
@@ -12,12 +12,13 @@ import { CommonModule } from '@angular/common';
   providers: [MessageService],
 })
 export class MessagesListComponent implements OnInit {
-  constructor(private readonly messageService: MessageService) {}
+  private messageService = inject(MessageService);
+  constructor() {}
 
   messagesList = signal<Message[]>([]);
 
   ngOnInit(): void {
-    this.messageService.getAll().subscribe((data) => {
+    this.messageService.getAll().subscribe((data: Message[]) => {
       this.messagesList.set(data);
     });
   }

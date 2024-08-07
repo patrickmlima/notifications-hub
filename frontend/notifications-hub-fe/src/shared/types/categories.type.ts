@@ -5,3 +5,5 @@ export type Category = SimpleIdEntity<number> & {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type CategoryViewDto = Pick<Category, 'id' | 'name'>;

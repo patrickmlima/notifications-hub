@@ -1,16 +1,18 @@
 <section>
-  <table>
+  <table class="table table-striped">
     <thead>
       <tr>
-        <th>Message</th>
-        <th>Created at</th>
+        <th scope="col">Message</th>
+        <th scope="col">Created at</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let message of messagesList()">
+      @for (message of messagesList(); track $index) {
+      <tr>
         <td>{{ message.body }}</td>
         <td>{{ message.createdAt }}</td>
       </tr>
+      }
     </tbody>
   </table>
 </section>

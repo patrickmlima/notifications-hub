@@ -1,15 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiRepository } from '../interfaces/api-respository';
+import { inject } from '@angular/core';
 
 export class ResourceApiRepository<R> implements ApiRepository<R, number> {
+  private http: HttpClient = inject(HttpClient);
   private resourceUrl: string;
 
-  private http: HttpClient;
-
-  constructor(serverUrl: string, resourceUri: string, http: HttpClient) {
+  constructor(serverUrl: string, resourceUri: string) {
     this.resourceUrl = `${serverUrl}/${resourceUri}`;
-    this.http = http;
   }
 
   getAll(): Observable<R[]> {

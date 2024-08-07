@@ -1,8 +1,15 @@
 <header>
-  <h1>Notifications Hub</h1>
+  <h1 class="h1">Notifications Hub</h1>
 </header>
-<main>
+<main class="container">
+  <section class="row align-items-end">
+    <div class="col">
+      <app-new-message></app-new-message>
+    </div>
+  </section>
   <router-outlet />
 </main>
 
-<footer>&copy; Patrick lima, 2024</footer>
+<footer>
+  <p class="text-body-secondary">&copy; Patrick lima, 2024</p>
+</footer>
