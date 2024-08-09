@@ -6,9 +6,11 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import com.patricklima.myapp.notifications.entities.pks.MessageDispatchId;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
@@ -20,17 +22,17 @@ public class MessageDispatch {
 	@EmbeddedId
 	private MessageDispatchId messageDispatchId;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
 	@MapsId("messageId")
 	@JoinColumn(name = "message_id")
 	private Message message;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@MapsId("userId")
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId("channelId")
 	@JoinColumn(name = "channel_id")
 	private NotificationChannel channel;

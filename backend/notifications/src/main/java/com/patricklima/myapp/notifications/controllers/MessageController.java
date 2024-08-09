@@ -8,19 +8,22 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.patricklima.myapp.notifications.dto.CreateMessageRequest;
+import com.patricklima.myapp.notifications.dto.MessageDetailDto;
 import com.patricklima.myapp.notifications.dto.MessageViewDto;
 import com.patricklima.myapp.notifications.entities.Message;
 import com.patricklima.myapp.notifications.services.MessageDispatchService;
 import com.patricklima.myapp.notifications.services.MessageService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
@@ -58,19 +61,22 @@ public class MessageController {
 		messageDispatchService.sendMessageNotifications(newMessage);
 		return ResponseEntity.status(201).body(newMessage);
 	}
-	
-	@GetMapping("{messageId}")	
+
+	@GetMapping("/{messageId}")
 	@Operation(summary = "Return complete data for a message", responses = {
 			@ApiResponse(responseCode = "200", description = "Success"),
 			@ApiResponse(responseCode = "404", description = "Bad request"),
-			@ApiResponse(responseCode = "500", description = "Internal server error") })
-	public ResponseEntity<Message> getMessage(@RequestParam Long messageId) {
+			@ApiResponse(responseCode = "500", description = "Internal server error") }, parameters = {
+					@Parameter(in = ParameterIn.PATH, required = true, name = "messageId") })
+	public ResponseEntity<MessageDetailDto> getMessage(@PathVariable Long messageId) {
 		Optional<Message> message = messageService.getMessage(messageId);
-		
-		if(message.isEmpty()) {
+
+		if (message.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
-		
-		return ResponseEntity.ok(message.get());
+
+		MessageDetailDto dto = new MessageDetailDto(message.get());
+
+		return ResponseEntity.ok(dto);
 	}
 }

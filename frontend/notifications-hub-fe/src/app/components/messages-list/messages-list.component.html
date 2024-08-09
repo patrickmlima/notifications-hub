@@ -8,14 +8,20 @@
     <thead>
       <tr>
         <th scope="col">Message</th>
+        <th scope="col">Category</th>
         <th scope="col">Created at</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
       @for (message of messagesList(); track $index) {
       <tr>
         <td>{{ message.body }}</td>
+        <td>{{ message.category.name }}</td>
         <td>{{ message.createdAt }}</td>
+        <td>
+          <button class="btn btn-seconday">View</button>
+        </td>
       </tr>
       }
     </tbody>
