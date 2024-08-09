@@ -5,3 +5,8 @@ export type NotificationChannel = SimpleIdEntity<number> & {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type NotificationChannelViewDto = Pick<
+  NotificationChannel,
+  'id' | 'name'
+>;

@@ -30,4 +30,12 @@ export class ResourceApiRepository<R> implements ApiRepository<R, number> {
     const url = `${this.resourceUrl}/${id}`;
     return this.http.delete(this.resourceUrl);
   }
+
+  protected getHttpClient() {
+    return this.http;
+  }
+
+  protected getResourceUrl() {
+    return this.resourceUrl;
+  }
 }

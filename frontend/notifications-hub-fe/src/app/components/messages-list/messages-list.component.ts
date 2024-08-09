@@ -3,11 +3,12 @@ import { MessageService } from '../../services/message.service';
 import { Message } from '../../../shared/types/message.type';
 import { CommonModule } from '@angular/common';
 import { NewMessageComponent } from '../new-message/new-message.component';
+import { MessageDetailsComponent } from '../message-details/message-details.component';
 
 @Component({
   selector: 'app-messages-list',
   standalone: true,
-  imports: [CommonModule, NewMessageComponent],
+  imports: [CommonModule, NewMessageComponent, MessageDetailsComponent],
   templateUrl: './messages-list.component.html',
   styleUrl: './messages-list.component.css',
   providers: [MessageService],

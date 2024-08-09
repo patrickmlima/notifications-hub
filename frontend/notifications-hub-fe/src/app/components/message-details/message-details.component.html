@@ -10,5 +10,43 @@
       (click)="close()"
     ></button>
   </div>
-  <div class="modal-body"></div>
+  <div class="modal-body">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Category: {{ message()?.category?.name }}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">
+          Created at: {{ message()?.createdAt }}
+        </h6>
+        <p class="card-text">{{ message()?.body }}</p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Sent to</th>
+              <th>Notification method</th>
+              <th>Sent at</th>
+              <th>Delivery at</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (dispatch of message()?.messageDispatches; track $index) {
+            <tr>
+              <td>
+                {{ dispatch.user.name }}
+              </td>
+              <td>
+                {{ dispatch.channel.name }}
+              </td>
+              <td>
+                {{ dispatch.createdAt }}
+              </td>
+              <td>
+                {{ dispatch.deliveredAt }}
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </ng-template>

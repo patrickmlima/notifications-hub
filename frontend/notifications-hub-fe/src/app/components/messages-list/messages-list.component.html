@@ -20,7 +20,7 @@
         <td>{{ message.category.name }}</td>
         <td>{{ message.createdAt }}</td>
         <td>
-          <button class="btn btn-seconday">View</button>
+          <app-message-details [messageId]="message.id"></app-message-details>
         </td>
       </tr>
       }

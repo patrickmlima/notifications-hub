@@ -1,0 +1,5 @@
+.card-text {
+  background-color: var(--color-secondary);
+  color: white;
+  padding: 2rem;
+}

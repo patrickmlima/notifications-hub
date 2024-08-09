@@ -7,3 +7,5 @@ export type User = SimpleIdEntity<number> & {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type UserViewDto = Pick<User, 'id' | 'name'>;
