@@ -1,0 +1,59 @@
+services:
+  database:
+    image: "postgres:latest"
+    restart: always
+    shm_size: 128mb
+    environment:
+      - "POSTGRES_DB=mydatabase"
+      - "POSTGRES_PASSWORD=secret"
+      - "POSTGRES_USER=myuser"
+    ports:
+      - 5432:5432
+    volumes:
+      - notifications_db_data:/var/lib/postgresql/data
+    networks:
+      - notifications_db_net
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8085:8080
+    networks:
+      - notifications_db_net
+    environment:
+      ADMINER_DEFAULT_SERVER: database
+    depends_on:
+      - database
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8000:8000
+    networks:
+      - notifications_db_net
+      - notifications_app
+    depends_on:
+      - database
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 80:80
+    networks:
+      - notifications_app
+    depends_on:
+      - backend
+
+volumes:
+  notifications_db_data:
+
+networks:
+  notifications_db_net:
+  notifications_app:
